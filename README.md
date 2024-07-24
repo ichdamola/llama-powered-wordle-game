@@ -42,6 +42,6 @@ This project implements a Wordle game using the Llama Language Model (LLM) for w
 
 To start the game, run the following command:
 ```sh
-streamlit run app.py
+streamlit run wordle.py
 
 
