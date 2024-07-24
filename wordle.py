@@ -33,7 +33,7 @@ def word_dict_from_llama(prompt):
         return None
 
 
-# Example usage with your provided prompt
+# Prompt to the model to generate the word
 prompt = """
 below , are key pair in the entry in the JSON follow a pattern
 {"5-letter": ["house", "table", "horse", "mouse", "cloud"],
