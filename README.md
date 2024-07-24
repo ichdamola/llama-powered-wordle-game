@@ -2,13 +2,15 @@
 
 This project implements a Wordle game using the Llama Language Model (LLM) for word generation and Streamlit for the user interface.
 
-## Watch the Video
+
+## Picture
+
+![Screenshot 2024-07-23 at 16 42 52](https://github.com/user-attachments/assets/a8f4f87a-f206-41be-9e30-d79e8964335e)
+
+ ## Watch the Demo
 
 [![Watch the video](https://github.com/user-attachments/assets/a8f4f87a-f206-41be-9e30-d79e8964335e)](https://github.com/user-attachments/assets/6810f753-48ad-44be-a5eb-b05d949ca91a)
 
-
-
-![Screenshot 2024-07-23 at 16 42 52](https://github.com/user-attachments/assets/a8f4f87a-f206-41be-9e30-d79e8964335e)
 
 ## Features
 
