@@ -1,5 +1,4 @@
 # Building a Wordle Game with Python and Streamlit 🎮
-![Screenshot 2024-07-23 at 16 42 52](https://github.com/user-attachments/assets/a8f4f87a-f206-41be-9e30-d79e8964335e)
 Welcome to this tutorial on building a Wordle game using Python and Streamlit! This project demonstrates how to create an interactive and fun word-guessing game that you can play directly in your web browser.
 
 # What is Wordle? 🤔
