@@ -1,11 +1,9 @@
-# Building a Wordle Game with Python and Streamlit 🎮
-<img src="https://github.com/user-attachments/assets/a8f4f87a-f206-41be-9e30-d79e8964335e" alt="Screenshot 2024-07-23 at 16 42 52" width="1000" height="300">
-
-Welcome to this tutorial on building a Wordle game using Python and Streamlit! This project demonstrates how to create an interactive and fun word-guessing game that you can play directly in your web browser.
+# Building a Fun and Interactive Wordle Game with Generative AI 🎮
+Welcome to our journey of building an engaging Wordle game using generative AI! In this blog, we'll explore how to harness the power of generative AI to create a Wordle game that is both fun and educational. We'll guide you through the entire process, from setting up your environment to implementing and running the game. Whether you're a seasoned developer or a curious beginner, this guide will help you get started.
 
 # What is Wordle? 🤔
-
 Wordle is a popular word-guessing game where players attempt to guess a hidden word within a limited number of tries. After each guess, feedback is provided in the form of colored tiles indicating how close the guess was to the hidden word.
+
 
 # Watch the Tutorial Video 🎥
 
@@ -20,8 +18,9 @@ In this tutorial, we will walk through the process of building a Wordle game. We
 
 1. Setting up the project environment
 2. Generating word patterns and lists
-3. Implementing the game logic
-4. Creating the user interface with Streamlit
+3. Fetching word patterns using generative AI
+4. Implementing the game logic
+5. Creating the user interface with Streamlit
 
 # 1. Setting Up the Project Environment 🛠️
 First, we need to set up our project environment. We will use Python and Streamlit for this project. Begin by creating a virtual environment and installing the necessary dependencies.
@@ -31,9 +30,15 @@ python -m venv venv
 source venv/bin/activate
 pip install streamlit
 ```
+After activating the virtual environment, you should see a (venv) prefix in your terminal prompt. Install the required packages using pip:
 
-# 2. Generating Word Patterns and Lists 📝
+```
+pip install -r requirements.txt
+```
+
+# Generating Word Patterns and Lists 📝
 We will start by defining a dictionary of word patterns and their associated words. This will be the pool from which the game will select words for the player to guess.
+
 ```
 static_word_dict = {
     "5-letter": ["house", "table", "horse", "mouse", "cloud"],
@@ -41,8 +46,55 @@ static_word_dict = {
 }
 ```
 
-# 3. Implementing the Game Logic 🔄
+- Install the required packages using pip:
+  
+# 3. Fetching Word Patterns Using Generative AI 🧠
+We use a generative AI model to create word patterns and their corresponding words. This is achieved through prompt engineering.
+
+Prompt for the Model:
+```
+prompt = """
+below , are key pair in the entry in the JSON follow a pattern
+{"5-letter": ["house", "table", "horse", "mouse", "cloud"],
+"6-letter": ["orange", "yellow", "purple", "brown", "green"]
+}
+
+Generate 4 more patterns and their 5 words list associated, similar to the above example in the JSON format. Do not reuse any of the examples . Do not return anything besides the example. Do not return 
+'Here are four additional patterns with 5-word lists:' in the response.
+"""
+```
+
+Function to Fetch Word Patterns:
+```
+import json
+from openai import OpenAI
+
+def word_dict_from_llama(prompt):
+    client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+
+    try:
+        completion = client.chat.completions.create(
+            model="lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF",
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+        )
+
+        content = completion.choices[0].message.content
+        response_json = json.loads(content)
+        return response_json
+
+    except Exception as e:
+        print(f"Error fetching or decoding response from OpenAI: {e}")
+        return None
+
+```
+
+
+# 4. Implementing the Game Logic 🔄
 Next, let's implement the game logic. This includes selecting a random word, handling user guesses, and providing feedback.
+
 ```python
 
 import random
@@ -160,8 +212,7 @@ def wordle_game():
 if __name__ == "__main__":
     wordle_game()
 ```
-
-# 4. Creating the User Interface with Streamlit 🌐
+5. Creating the User Interface with Streamlit 🌐
 Streamlit makes it easy to create an interactive web app. Here’s how we set up the user interface for our Wordle game:
 
 The main game area displays the current state of the word and previous guesses.
